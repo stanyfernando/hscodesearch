@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HSN CODE FINDER</title>
+    <style>
+      /* Body styles */
+      body {
+        background-color: #212121;
+        /* Dark gray background */
+        color: #fff;
+        /* White text */
+        font-family: Arial, sans-serif;
+        /* Font family */
+        margin: 0;
+        padding: 0;
+        display: flex;
+        justify-content: center;
+        /* Center content horizontally */
+        align-items: center;
+        /* Center content vertically */
+        height: 100vh;
+        /* Full height of viewport */
+      }
+
+      /* Container for search box and results */
+      .container {
+        max-width: 800px;
+        /* Limit page width */
+        width: 100%;
+        padding: 20px;
+        /* Add some padding */
+        box-sizing: border-box;
+        /* Include padding and border in the element's total width and height */
+        position: relative;
+        /* Relative positioning */
+        text-align: center;
+        /* Center text */
+      }
+
+      /* Styles for search box */
+      #search-box {
+        background-color: #171717;
+        color: #fff;
+        padding: 10px;
+        border: none;
+        width: calc(100% - 20px);
+        /* Adjusted width for padding */
+        box-sizing: border-box;
+        font-size: 16px;
+        transition: all 0.3s ease;
+        /* Smooth transition for animation */
+        z-index: 1;
+        /* Ensure search box stays above results */
+      }
+
+      /* Styles for table */
+      table {
+        width: 100%;
+        border-collapse: collapse;
+        background-color: rgba(0, 0, 0, 0.5);
+        /* Semi-transparent background */
+        margin-top: 50px;
+        /* Spacing from search box */
+        border-radius: 5px;
+        /* Rounded corners */
+        overflow: hidden;
+        /* Hide overflow */
+        display: none;
+        /* Initially hide the table */
+      }
+
+      th,
+      td {
+        border: 1px solid #dddddd;
+        text-align: left;
+        padding: 8px;
+      }
+
+      th {
+        background-color: #f2f2f2;
+        color: #333;
+        /* Dark gray text for header */
+      }
+
+      .product-name {
+        font-weight: bold;
+        /* Bold font for product names */
+      }
+
+      .category-label {
+        display: none;
+        /* Hide category labels */
+      }
+
+      .no-results {
+        display: none;
+        /* Hide no results message by default */
+        color: #fff;
+        /* Red color for the message */
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <!-- Search box -->
+      <input type="text" id="search-box" oninput="searchFunction()" placeholder="🔎   ENTER PRODUCT / HSN CODE HERE" autofocus>
+      <!-- Table to display search results -->
+      <table id="search-results">
+        <thead>
+          <tr>
+            <th>Product</th>
+            <th>HS Codes</th>
+          </tr>
+        </thead>
+        <tbody>
+          <!-- Table rows will be filled dynamically using JavaScript -->
+        </tbody>
+      </table>
+      <!-- Message for no search results -->
+      <p class="no-results">No matching products found.</p>
+    </div>
+    <script>
+      function searchFunction() {
+        // Declare variables
+        var input, filter, table, tr, td, i, txtValue, noResultsMessage;
+        input = document.getElementById("search-box");
+        filter = input.value.toUpperCase();
+        table = document.getElementById("search-results");
+        tr = table.getElementsByTagName("tr");
+        noResultsMessage = document.querySelector(".no-results");
+        // Show the table when the user starts typing
+        table.style.display = "table";
+        // Hide section names
+        var thElements = table.querySelectorAll("th");
+        thElements.forEach(function(th) {
+          th.style.display = ""; // Display the headers
+        });
+        // Loop through all table rows, and hide those that don't match the search query
+        var matchFound = false;
+        for (i = 0; i < tr.length; i++) {
+          var found = false;
+          var tdElements = tr[i].querySelectorAll("td");
+          for (var j = 0; j < tdElements.length; j++) { // Loop through all columns
+            td = tdElements[j];
+            txtValue = td.textContent || td.innerText;
+            if (txtValue.toUpperCase().indexOf(filter) > -1) {
+              found = true;
+              break;
+            }
+          }
+          if (found) {
+            tr[i].style.display = "";
+            matchFound = true;
+          } else {
+            tr[i].style.display = "none";
+          }
+        }
+        // Show or hide no results message
+        if (matchFound) {
+          noResultsMessage.style.display = "none";
+        } else {
+          noResultsMessage.style.display = "block";
+        }
+        // Hide the table if the search box is empty
+        if (filter === "") {
+          table.style.display = "none";
+          noResultsMessage.style.display = "none";
+        }
+      }
+    </script>
+    <script>
+      // Populate the table with data
+      var data = [
+        ["HAIR CARE", "DRYER", "85163100"],
+        ["HAIR CARE", "GROOMER (CLIPPER)", "85102000"],
+        ["HAIR CARE", "STRAIGHTNER", "85163200"],
+        ["HAIR CARE", "SHAVER", "85101000"],
+        ["KITCHEN APPLIANCES", "AIR FRYER", "85167990"],
+        ["KITCHEN APPLIANCES", "BLENDER", "85094000"],
+        ["KITCHEN APPLIANCES", "COFFEE MAKER", "85167100"],
+        ["KITCHEN APPLIANCES", "COOKER (GAS)", "73211100"],
+        ["KITCHEN APPLIANCES", "COOKER HOOD", "84146000"],
+        ["KITCHEN APPLIANCES", "COOKWARE SET", "73239300"],
+        ["KITCHEN APPLIANCES", "ELECTRIC OVEN", "85166090"],
+        ["KITCHEN APPLIANCES", "FOOD STEAMER", "76151020"],
+        ["KITCHEN APPLIANCES", "HOB", "73211100"],
+        ["KITCHEN APPLIANCES", "BUILT-IN OVEN", "85166090"],
+        ["KITCHEN APPLIANCES", "KETTLE", "85167920"],
+        ["KITCHEN APPLIANCES", "MICROWAVE OVEN", "85165000"],
+        ["KITCHEN APPLIANCES", "PRESSURE COOKER", "76151020"],
+        ["KITCHEN APPLIANCES", "RICE COOKER", "85166010"],
+        ["KITCHEN APPLIANCES", "STAINLESS STEEL WATER BOTTLE", "73239900"],
+        ["KITCHEN APPLIANCES", "TEA MAKER", "85167100"],
+        ["KITCHEN APPLIANCES", "TOASTER / SANDWICH MAKER (WAFFLE)", "85167200"],
+        ["HOME APPLIANCES", "AIR COOLER", "84796000"],
+        ["HOME APPLIANCES", "CD RCR", "85272900"],
+        ["HOME APPLIANCES", "DVD", "85219000"],
+        ["HOME APPLIANCES", "FRIDGE", "84181090"],
+        ["HOME APPLIANCES", "HIFI SET / HOME THEATRE", "85279100"],
+        ["HOME APPLIANCES", "IRON", "85164000"],
+        ["HOME APPLIANCES", "RADIO", "85272900"],
+        ["HOME APPLIANCES", "SOUND BAR", "85182900"],
+        ["HOME APPLIANCES", "SPEAKER", "85182900"],
+        ["HOME APPLIANCES", "ORGAN - MUSIC", "92071000"],
+        ["HOME APPLIANCES", "TV (OVER) 32\"", "85287299"],
+        ["HOME APPLIANCES", "TV 32\"", "85287291"],
+        ["HOME APPLIANCES", "CAR STEREO SET (RADIO/PLAYER)", "85272900"],
+        ["HOME APPLIANCES", "FAN", "84145100"],
+        ["HOME APPLIANCES", "VACUUM CLEANER", "85081100"],
+        ["HOME APPLIANCES", "WASHING MACHINE F/L (5.5 KG TO 7.5 KG )", "84501143"],
+        ["HOME APPLIANCES", "WASHING MACHINE F/L (7.5 KG TO 9.5 KG)", "84501144"],
+        ["HOME APPLIANCES", "WASHING MACHINE F/L (OVER 10 KG)", "84501149"],
+        ["HOME APPLIANCES", "WASHING MACHINE T/L (5.5 KG TO 7.5 KG )", "84501133"],
+        ["HOME APPLIANCES", "WASHING MACHINE T/L (7.5 KG TO 9.5 KG)", "84501134"],
+        ["HOME APPLIANCES", "WASHING MACHINE T/L (OVER 10 KG)", "84502000"],
+        ["HOME APPLIANCES", "WATER DISPENSOR (FILTER)", "84158190"],
+        ["BATHROOM", "WATER HEATER / HOME SHOWER", "85161000"],
+        ["BATHROOM", "HIGH PRESSURE WASHER", "84242000"],
+        ["EMERGENCY LIGHTS & TORCHES", "EMERGENCY LANTERN, TORCH, LIGHT", "85131010"],
+        ["EMERGENCY LIGHTS & TORCHES", "EMERGENCY LIGHT LED", "94054090"],
+        ["EMERGENCY LIGHTS & TORCHES", "TORCH", "85121000"],
+        ["SNACKS & OTHERS", "CHOCOLATE", "18063100"],
+        ["SNACKS & OTHERS", "NESCAFE", "21011200"],
+        ["SNACKS & OTHERS", "PRINGLES", "19059020"],
+        ["PERFUMES", "BODY SPRAY", "33072000"],
+        ["PERFUMES", "PERFUMES", "33030010"],
+        ["LIQUOR", "BRANDY VSOP", "22082000"],
+        ["LIQUOR", "GIN", "22085000"],
+        ["LIQUOR", "RUM", "22084010"],
+        ["LIQUOR", "TEQUILA / LIQUEUR", "22087000"],
+        ["LIQUOR", "VODKA", "22086000"],
+        ["LIQUOR", "WHISKY", "22083000"],
+        ["LIQUOR", "WINE (SWEET, RED, WHITE)", "22042100"],
+        ["CIGARETTES", "MANCHESTER - FULL FLAVOR (84 MM)", "24022050"],
+        ["CIGARETTES", "MANCHESTER - SUPERSLIMS (99 MM)", "24022060"],
+        ["CIGARETTES", "MANCHESTER DOUBLE DRIVE (84 MM)", "24022050"]
+      ];
+      var tableBody = document.querySelector("#search-results tbody");
+      data.forEach(function(row) {
+        var tr = document.createElement("tr");
+        row.forEach(function(cellData, index) {
+          var td = document.createElement("td");
+          td.textContent = cellData;
+          if (index === 0) {
+            td.classList.add("category-label"); // Add class to category labels for hiding
+          } else {
+            td.classList.add("product-name"); // Add class to product names for styling
+          }
+          tr.appendChild(td);
+        });
+        tableBody.appendChild(tr);
+      });
+    </script>
+  </body>
+</html>
