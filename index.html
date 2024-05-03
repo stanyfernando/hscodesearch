@@ -13,67 +13,48 @@
       /* Body styles */
       body {
         background-color: #212121;
-        /* Dark gray background */
         color: #fff;
-        /* White text */
         font-family: Arial, sans-serif;
-        /* Font family */
         margin: 0;
         padding: 0;
         display: flex;
         justify-content: center;
-        /* Center content horizontally */
         align-items: center;
-        /* Center content vertically */
         min-height: 100vh;
-        /* Full height of viewport */
       }
 
-      /* Container for search box and results */
+      /* Container styles */
       .container {
         max-width: 800px;
-        /* Limit page width */
         width: 100%;
         padding: 20px;
-        /* Add some padding */
         box-sizing: border-box;
-        /* Include padding and border in the element's total width and height */
         position: relative;
-        /* Relative positioning */
         text-align: center;
-        /* Center text */
       }
 
-      /* Styles for search box */
+      /* Search box styles */
       #search-box {
         background-color: #171717;
         color: #fff;
         padding: 10px;
         border: none;
         width: calc(100% - 20px);
-        /* Adjusted width for padding */
         box-sizing: border-box;
         font-size: 16px;
         transition: all 0.3s ease;
-        /* Smooth transition for animation */
         z-index: 1;
-        /* Ensure search box stays above results */
       }
 
-      /* Styles for table */
+      /* Table styles */
       table {
         width: 100%;
         border-collapse: collapse;
         background-color: rgba(0, 0, 0, 0.5);
-        /* Semi-transparent background */
         margin-top: 50px;
-        /* Spacing from search box */
         border-radius: 5px;
-        /* Rounded corners */
         overflow: hidden;
-        /* Hide overflow */
         display: none;
-        /* Initially hide the table */
       }
 
       th,
@@ -86,24 +67,19 @@
       th {
         background-color: #f2f2f2;
         color: #333;
-        /* Dark gray text for header */
       }
 
       .product-name {
         font-weight: bold;
-        /* Bold font for product names */
       }
 
       .category-label {
         display: none;
-        /* Hide category labels */
       }
 
       .no-results {
         display: none;
-        /* Hide no results message by default */
         color: #fff;
-        /* Red color for the message */
       }
 
       /* Footer styles */
@@ -112,9 +88,7 @@
         color: #999;
         font-size: 14px;
         margin-top: 40px;
-        /* Add space above the footer */
         margin-bottom: 10px;
-        /* Adjusted margin */
       }
 
       .footer a {
@@ -129,9 +103,7 @@
   </head>
   <body>
     <div class="container">
-      <!-- Search box -->
       <input type="text" id="search-box" oninput="searchFunction()" placeholder="🔎   ENTER PRODUCT / HSN CODE HERE" autofocus>
-      <!-- Table to display search results -->
       <table id="search-results">
         <thead>
           <tr>
@@ -143,9 +115,7 @@
           <!-- Table rows will be filled dynamically using JavaScript -->
         </tbody>
       </table>
-      <!-- Message for no search results -->
       <p class="no-results">No matching products found.</p>
-      <!-- Footer -->
       <footer class="footer"> Made by <a href="https://stanyfernando.blog" target="_blank">Stany Fernando</a>
       </footer>
     </div>
@@ -188,13 +158,13 @@
         ["HOME APPLIANCES", "CAR STEREO SET (RADIO/PLAYER)", "85272900"],
         ["HOME APPLIANCES", "FAN", "84145100"],
         ["HOME APPLIANCES", "VACUUM CLEANER", "85081100"],
-        ["HOME APPLIANCES", "WASHING MACHINE F/L (5.5 KG TO 7.5 KG )", "84501143"],
-        ["HOME APPLIANCES", "WASHING MACHINE F/L (7.5 KG TO 9.5 KG)", "84501144"],
-        ["HOME APPLIANCES", "WASHING MACHINE F/L (OVER 10 KG)", "84501149"],
-        ["HOME APPLIANCES", "WASHING MACHINE T/L (5.5 KG TO 7.5 KG )", "84501133"],
-        ["HOME APPLIANCES", "WASHING MACHINE T/L (7.5 KG TO 9.5 KG)", "84501134"],
-        ["HOME APPLIANCES", "WASHING MACHINE T/L (OVER 10 KG)", "84502000"],
-        ["HOME APPLIANCES", "WATER DISPENSOR (FILTER)", "84158190"],
+        ["HOME APPLIANCES", "WASHING MACHINE FRONT LOAD (5.5 KG TO 7.5 KG )", "84501143"],
+        ["HOME APPLIANCES", "WASHING MACHINE FRONT LOAD (7.5 KG TO 9.5 KG)", "84501144"],
+        ["HOME APPLIANCES", "WASHING MACHINE FRONT LOAD (OVER 10 KG)", "84501149"],
+        ["HOME APPLIANCES", "WASHING MACHINE TOP LOAD (5.5 KG TO 7.5 KG )", "84501133"],
+        ["HOME APPLIANCES", "WASHING MACHINE TOP LOAD (7.5 KG TO 9.5 KG)", "84501134"],
+        ["HOME APPLIANCES", "WASHING MACHINE TOP LOAD (OVER 10 KG)", "84502000"],
+        ["HOME APPLIANCES", "WATER DISPENSOR (FILTER/PURIFIER)", "84158190"],
         ["BATHROOM", "WATER HEATER / HOME SHOWER", "85161000"],
         ["BATHROOM", "HIGH PRESSURE WASHER", "84242000"],
         ["EMERGENCY LIGHTS & TORCHES", "EMERGENCY LANTERN, TORCH, LIGHT", "85131010"],
@@ -212,9 +182,8 @@
         ["LIQUOR", "VODKA", "22086000"],
         ["LIQUOR", "WHISKY", "22083000"],
         ["LIQUOR", "WINE (SWEET, RED, WHITE)", "22042100"],
-        ["CIGARETTES", "MANCHESTER - FULL FLAVOR (84 MM)", "24022050"],
-        ["CIGARETTES", "MANCHESTER - SUPERSLIMS (99 MM)", "24022060"],
-        ["CIGARETTES", "MANCHESTER DOUBLE DRIVE (84 MM)", "24022050"]
+        ["CIGARETTES", "74 MM TO 84 MM", "24022050"],
+        ["CIGARETTES", "MORE THAN 99 MM", "24022060"],
       ];
       var tableBody = document.querySelector("#search-results tbody");
       data.forEach(function(row) {
@@ -223,9 +192,9 @@
           var td = document.createElement("td");
           td.textContent = cellData;
           if (index === 0) {
-            td.classList.add("category-label"); // Add class to category labels for hiding
+            td.classList.add("category-label");
           } else {
-            td.classList.add("product-name"); // Add class to product names for styling
+            td.classList.add("product-name");
           }
           tr.appendChild(td);
         });
@@ -235,21 +204,24 @@
       function searchFunction() {
         var input, filter, table, tr, td, i, txtValue, noResultsMessage;
         input = document.getElementById("search-box");
-        filter = input.value.trim(); // Trim whitespace
+        filter = input.value.trim().toUpperCase(); // Convert input to uppercase
         table = document.getElementById("search-results");
         tr = table.getElementsByTagName("tr");
         noResultsMessage = document.querySelector(".no-results");
-        // Show the table when the user starts typing
-        table.style.display = "table";
-        // Loop through all table rows, and hide those that don't match the search query
+        if (filter.length < 3) {
+          table.style.display = "none";
+          noResultsMessage.style.display = "none";
+          return; // Exit function if less than 3 characters
+        }
+        table.style.display = "table"; // Show the table
         var matchFound = false;
         for (i = 0; i < tr.length; i++) {
           var found = false;
           var tdElements = tr[i].querySelectorAll("td");
-          for (var j = 0; j < tdElements.length; j++) { // Loop through all columns
+          for (var j = 0; j < tdElements.length; j++) {
             td = tdElements[j];
             txtValue = td.textContent || td.innerText;
-            if (txtValue.toUpperCase().startsWith(filter.toUpperCase())) {
+            if (txtValue.toUpperCase().indexOf(filter) > -1) { // Check if text contains the filter string
               found = true;
               break;
             }
@@ -261,13 +233,7 @@
             tr[i].style.display = "none";
           }
         }
-        // Show or hide no results message
-        noResultsMessage.style.display = matchFound ? "none" : "block";
-        // Hide the table if the search box is empty
-        if (filter === "") {
-          table.style.display = "none";
-          noResultsMessage.style.display = "none";
-        }
+        noResultsMessage.style.display = matchFound ? "none" : "block"; // Show or hide no results message
       }
     </script>
   </body>
